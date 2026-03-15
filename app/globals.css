@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:     #0C0D11;
+  --bg2:    #11131A;
+  --card:   #181B24;
+  --card2:  #1E2130;
+  --border: rgba(255,255,255,0.07);
+  --cyan:   #00D4FF;
+  --pink:   #FF3B7A;
+  --purple: #A259FF;
+  --green:  #00E676;
+  --yellow: #FFD600;
+  --text:   #F0F2F5;
+  --text2:  #8B909E;
+  --text3:  #4A5060;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+@keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+@keyframes phoneFloat { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-10px) } }
+@keyframes fadeUp { from{ opacity:0; transform:translateY(24px) } to{ opacity:1; transform:translateY(0) } }
+@keyframes shimmer { from{ background-position: -200% 0 } to{ background-position: 200% 0 } }
+
+.fade-up { animation: fadeUp .6s ease both; }
+.fade-up-2 { animation: fadeUp .6s ease .15s both; }
+.fade-up-3 { animation: fadeUp .6s ease .3s both; }
+
+a { text-decoration: none; color: inherit; }
