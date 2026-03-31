@@ -22,7 +22,6 @@ export default function TermsOfServicePage() {
     <main style={{ backgroundColor: '#08080F', minHeight: '100vh', color: '#fff', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       <div style={{ maxWidth: 840, margin: '0 auto', padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 24px) 120px' }}>
 
-        {/* Header */}
         <div style={{ marginBottom: 56, borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: 36 }}>
           <Link href="/about" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'rgba(255,255,255,.4)', marginBottom: 24, textDecoration: 'none', transition: 'color .15s' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,.7)')}
@@ -41,7 +40,6 @@ export default function TermsOfServicePage() {
           </div>
         </div>
 
-        {/* Sections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
           {TOS_SECTIONS.map((section, index) => (
             <section key={index}>
@@ -54,7 +52,6 @@ export default function TermsOfServicePage() {
             </section>
           ))}
 
-          {/* Contact block */}
           <section style={{ padding: 'clamp(24px, 5vw, 40px)', borderRadius: 20, backgroundColor: '#0E0E18', border: '1px solid rgba(0,212,255,0.15)' }}>
             <h2 style={{ fontSize: 'clamp(15px, 3vw, 18px)', fontWeight: 800, color: '#00D4FF', marginBottom: 14 }}>
               11. Contact Information
@@ -65,7 +62,7 @@ export default function TermsOfServicePage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
                 { label: 'Email', value: 'hello@logary.app', href: 'mailto:hello@logary.app' },
-                { label: 'Discord', value: 'Official Logary Server', href: 'https://discord.gg/SJNqjdqMd3' },
+                { label: 'Discord', value: 'Official Logary Server', href: 'https://discord.gg/CDAgZYeZnP' },
               ].map(c => (
                 <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                   <span style={{ fontWeight: 700, color: '#fff', minWidth: 60, fontSize: 14 }}>{c.label}:</span>

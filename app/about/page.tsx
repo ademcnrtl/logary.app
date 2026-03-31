@@ -3,25 +3,25 @@
 import { useState, useEffect } from 'react'
 
 const SECTIONS = [
-  { id: 'about',     label: 'About Us' },
-  { id: 'roadmap',   label: 'Roadmap' },
+  { id: 'about', label: 'About Us' },
+  { id: 'roadmap', label: 'Roadmap' },
   { id: 'changelog', label: 'Changelog' },
-  { id: 'faq',       label: 'FAQ' },
-  { id: 'contact',   label: 'Contact' },
-  { id: 'privacy',   label: 'Privacy & Terms' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'contact', label: 'Contact' },
+  { id: 'privacy', label: 'Privacy Policy' },
 ]
 
 const ROADMAP = [
-  { status: 'done',    label: 'Game Library & Deep Logging', q: 'Done' },
-  { status: 'done',    label: 'Community & Social Interactions', q: 'Done' },
-  { status: 'done',    label: 'Steam Library Integration', q: 'Done' },
-  { status: 'done',    label: 'Logary PRO & Patreon Auto-Sync', q: 'Done' },
-  { status: 'done',    label: 'Logy AI — Discord Bot Connected to DB', q: 'Done' },
-  { status: 'active',  label: 'Interactive Social Feed — Clickable profiles & @tags', q: 'This Week' },
-  { status: 'active',  label: 'Quick-Access Lists — Tap home stats to open libraries', q: 'This Week' },
-  { status: 'active',  label: 'Logary V1.0.0 Global Launch', q: 'Q2 2026' },
-  { status: 'active',  label: 'Console sync — Full PSN & Xbox import', q: 'Q3 2026' },
-  { status: 'soon',    label: 'Logary Web — Browser companion', q: 'Q4 2026' },
+  { status: 'done', label: 'Game Library & Deep Logging', q: 'Done' },
+  { status: 'done', label: 'Community & Social Interactions', q: 'Done' },
+  { status: 'done', label: 'Steam Library Integration', q: 'Done' },
+  { status: 'done', label: 'Logary PRO & Patreon Auto-Sync', q: 'Done' },
+  { status: 'done', label: 'Logy AI — Discord Bot Connected to DB', q: 'Done' },
+  { status: 'active', label: 'Interactive Social Feed — Clickable profiles & @tags', q: 'This Week' },
+  { status: 'active', label: 'Quick-Access Lists — Tap home stats to open libraries', q: 'This Week' },
+  { status: 'active', label: 'Logary V1.0.0 Global Launch', q: 'Q2 2026' },
+  { status: 'active', label: 'Console sync — Full PSN & Xbox import', q: 'Q3 2026' },
+  { status: 'soon', label: 'Logary Web — Browser companion', q: 'Q4 2026' },
   { status: 'planned', label: 'Gaming Clubs & Sub-communities', q: 'Late 2026' },
   { status: 'planned', label: 'In-App Logy AI Assistant', q: '2027' },
   { status: 'planned', label: 'API for developers', q: '2027' },
@@ -56,9 +56,9 @@ const FAQ = [
 ]
 
 const STATUS_STYLE: Record<string, { color: string; bg: string; label: string }> = {
-  done:    { color: '#00E676', bg: 'rgba(0,230,118,.1)',  label: 'Done' },
-  active:  { color: '#00D4FF', bg: 'rgba(0,212,255,.1)',  label: 'In progress' },
-  soon:    { color: '#A259FF', bg: 'rgba(162,89,255,.1)', label: 'Soon' },
+  done: { color: '#00E676', bg: 'rgba(0,230,118,.1)', label: 'Done' },
+  active: { color: '#00D4FF', bg: 'rgba(0,212,255,.1)', label: 'In progress' },
+  soon: { color: '#A259FF', bg: 'rgba(162,89,255,.1)', label: 'Soon' },
   planned: { color: 'rgba(255,255,255,.3)', bg: 'rgba(255,255,255,.05)', label: 'Planned' },
 }
 
@@ -121,7 +121,7 @@ export default function AboutPage() {
       <div style={{ padding: '14px', borderRadius: 12, background: 'rgba(0,212,255,.05)', border: '1px solid rgba(0,212,255,.12)' }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: '#00D4FF', marginBottom: 6 }}>Need help?</div>
         <p style={{ fontSize: 12, color: 'var(--text3)', lineHeight: 1.6, marginBottom: 8 }}>Join our Discord or send us a message.</p>
-        <a href="https://discord.gg/SJNqjdqMd3" style={{ fontSize: 12, fontWeight: 600, color: '#00D4FF' }}>Open Discord →</a>
+        <a href="https://discord.gg/CDAgZYeZnP" style={{ fontSize: 12, fontWeight: 600, color: '#00D4FF' }}>Open Discord →</a>
       </div>
     </>
   )
@@ -129,7 +129,6 @@ export default function AboutPage() {
   return (
     <main style={{ paddingTop: 68, minHeight: '100vh' }}>
 
-      {/* Mobile section picker */}
       {isMobile && (
         <div style={{ position: 'sticky', top: 68, zIndex: 100, background: 'rgba(8,8,15,.96)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,.06)', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{SECTIONS.find(s => s.id === active)?.label}</span>
@@ -139,7 +138,6 @@ export default function AboutPage() {
         </div>
       )}
 
-      {/* Mobile drawer overlay */}
       {isMobile && drawerOpen && (
         <div style={{ position: 'fixed', top: 113, left: 0, right: 0, bottom: 0, background: 'rgba(8,8,15,.97)', backdropFilter: 'blur(20px)', zIndex: 99, padding: '24px 20px', overflowY: 'auto' }}>
           <Nav />
@@ -148,15 +146,12 @@ export default function AboutPage() {
 
       <div style={{ maxWidth: 1160, margin: '0 auto', padding: isMobile ? '28px 20px' : '48px 48px', display: 'flex', gap: 56, alignItems: 'flex-start' }}>
 
-        {/* Desktop sidebar */}
         {!isMobile && (
           <aside style={{ width: 200, flexShrink: 0, position: 'sticky', top: 88 }}><Nav /></aside>
         )}
 
-        {/* Main content */}
         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: isMobile ? 52 : 80 }}>
 
-          {/* ABOUT */}
           <section id="about" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
             <SectionBadge label="ABOUT US" color="#00D4FF" bg="rgba(0,212,255,.08)" border="1px solid rgba(0,212,255,.15)" />
             <SectionTitle>We built the app we always wanted.</SectionTitle>
@@ -175,7 +170,6 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* ROADMAP */}
           <section id="roadmap" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
             <SectionBadge label="ROADMAP" color="#A259FF" bg="rgba(162,89,255,.08)" border="1px solid rgba(162,89,255,.15)" />
             <SectionTitle>What we're building.</SectionTitle>
@@ -199,7 +193,6 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* CHANGELOG */}
           <section id="changelog" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
             <SectionBadge label="CHANGELOG" color="#00E676" bg="rgba(0,230,118,.08)" border="1px solid rgba(0,230,118,.15)" />
             <SectionTitle>What's new.</SectionTitle>
@@ -224,7 +217,6 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* FAQ */}
           <section id="faq" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
             <SectionBadge label="FAQ" color="#FFD600" bg="rgba(255,214,0,.08)" border="1px solid rgba(255,214,0,.15)" />
             <SectionTitle>Common questions.</SectionTitle>
@@ -248,13 +240,12 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* CONTACT */}
           <section id="contact" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
             <SectionBadge label="CONTACT" color="#00D4FF" bg="rgba(0,212,255,.08)" border="1px solid rgba(0,212,255,.15)" />
             <SectionTitle>Get in touch.</SectionTitle>
             <SectionSub>We read every message. Seriously.</SectionSub>
             <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 10 }}>
-              {[{ label: 'Discord', desc: 'Fastest response.', color: '#5865F2', href: 'https://discord.gg/SJNqjdqMd3' }, { label: 'Email', desc: 'hello@logary.app', color: '#00D4FF', href: 'mailto:hello@logary.app' }].map(c => (
+              {[{ label: 'Discord', desc: 'Fastest response.', color: '#5865F2', href: 'https://discord.gg/CDAgZYeZnP' }, { label: 'Email', desc: 'hello@logary.app', color: '#00D4FF', href: 'mailto:hello@logary.app' }].map(c => (
                 <a key={c.label} href={c.href} style={{ display: 'block', padding: '16px 18px', borderRadius: 12, background: 'var(--card)', border: '1px solid rgba(255,255,255,.07)', transition: 'border-color .18s' }}
                   onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,.18)')}
                   onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,.07)')}>
@@ -265,9 +256,8 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* PRIVACY */}
           <section id="privacy" style={{ scrollMarginTop: isMobile ? 130 : 88 }}>
-            <SectionBadge label="PRIVACY & TERMS" color="rgba(255,255,255,.5)" bg="rgba(255,255,255,.05)" border="1px solid rgba(255,255,255,.1)" />
+            <SectionBadge label="PRIVACY POLICY" color="rgba(255,255,255,.5)" bg="rgba(255,255,255,.05)" border="1px solid rgba(255,255,255,.1)" />
             <SectionTitle>Privacy Policy.</SectionTitle>
             <div style={{ background: 'var(--card)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 16, padding: isMobile ? '18px' : '28px' }}>
               {[

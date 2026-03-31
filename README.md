@@ -34,7 +34,7 @@ Whether you're finishing an indie gem or conquering an AAA title, Logary is ther
 ### Join Our Community
 Get the latest updates, report bugs, or just chat with the team!
 
-<a href="https://discord.gg/SJNqjdqMd3">
+<a href="https://discord.gg/CDAgZYeZnP">
   <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
 </a>
 

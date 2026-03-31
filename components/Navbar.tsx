@@ -1,7 +1,7 @@
-'use client'
-import { useState, useEffect, useRef } from 'react'
+"use client"
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FEATURES } from '@/lib/features'
 
 function useWidth() {
   const [w, setW] = useState(1200)
@@ -15,221 +15,130 @@ function useWidth() {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [featOpen, setFeatOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const featRef = useRef<HTMLDivElement>(null)
+  const [logoHovered, setLogoHovered] = useState(false);
+
   const width = useWidth()
   const isMobile = width < 768
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40)
+    const fn = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  useEffect(() => {
-    const fn = (e: MouseEvent) => {
-      if (featRef.current && !featRef.current.contains(e.target as Node)) setFeatOpen(false)
-    }
-    document.addEventListener('mousedown', fn)
-    return () => document.removeEventListener('mousedown', fn)
-  }, [])
-
   useEffect(() => { if (!isMobile) setMenuOpen(false) }, [isMobile])
-
-  const triangle = (
-    <div style={{
-      position: 'absolute', top: -6, left: '50%', transform: 'translateX(-50%)',
-      borderLeft: '6px solid transparent', borderRight: '6px solid transparent',
-      borderBottom: '6px solid #11131A',
-    }} />
-  )
 
   return (
     <>
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 68,
-        background: scrolled || menuOpen ? 'rgba(12,13,17,.94)' : 'transparent',
-        backdropFilter: scrolled || menuOpen ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,.05)' : '1px solid transparent',
-        transition: 'background .3s ease, border-color .3s ease',
+      <div style={{
+        position: 'fixed',
+        top: scrolled ? 16 : 24,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 200,
+        width: isMobile ? 'calc(100% - 32px)' : 'auto',
+        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
       }}>
-        <div style={{
-          maxWidth: 1160, margin: '0 auto', height: '100%',
-          padding: isMobile ? '0 20px' : '0 48px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+        <nav style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: 'rgba(10, 11, 16, 0.75)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: 100,
+          padding: '6px 8px 6px 12px',
+          boxShadow: scrolled
+            ? '0 20px 40px rgba(0,0,0,0.4)'
+            : '0 10px 30px rgba(0,0,0,0.2)',
+          transition: 'all 0.4s ease',
+          gap: isMobile ? 0 : 32,
         }}>
-
-          {/* LOGO */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0, textDecoration: 'none' }}>
-            <span style={{ fontSize: 19, fontWeight: 900, color: '#fff', letterSpacing: '-.02em' }}>
-              Logary
-            </span>
+          <Link href="/"
+            style={{
+              display: 'block',
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              textDecoration: 'none',
+              transition: 'box-shadow 0.3s ease',
+              boxShadow: logoHovered ? '0 0 20px rgba(0, 212, 255, 0.6)' : 'none',
+              flexShrink: 0
+            }}
+            onMouseEnter={() => setLogoHovered(true)}
+            onMouseLeave={() => setLogoHovered(false)}
+          >
+            <img
+              src="/favicon.png"
+              alt="Logary Logo"
+              style={{ width: '100%', height: '100%', borderRadius: 8, display: 'block' }}
+            />
           </Link>
-
-          {/* DESKTOP CENTER */}
           {!isMobile && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 32, flex: 1, justifyContent: 'center' }}>
-              <Link href="/about" style={{ color: 'var(--text2)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color .2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text2)')}
-              >
-                About
-              </Link>
-
-              <div ref={featRef} style={{ position: 'relative' }}>
-                <button onClick={() => setFeatOpen(o => !o)} style={{
-                  display: 'flex', alignItems: 'center', gap: 6, padding: '6px 0', border: 'none',
-                  background: 'transparent', color: featOpen ? '#fff' : 'var(--text2)',
-                  fontSize: 14, fontWeight: 500, cursor: 'pointer', transition: 'color .2s',
-                }}>
-                  Features
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
-                    style={{ opacity: featOpen ? 1 : 0.6, transition: 'transform .2s', transform: featOpen ? 'rotate(180deg)' : 'rotate(0)' }}>
-                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-
-                {featOpen && (
-                  <div style={{
-                    position: 'absolute', top: 'calc(100% + 18px)', left: '50%',
-                    transform: 'translateX(-50%)', width: 420,
-                    background: '#11131A', border: '1px solid rgba(255,255,255,.08)',
-                    borderRadius: 16, boxShadow: '0 24px 50px rgba(0,0,0,.5)',
-                    padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 4, zIndex: 300,
-                  }}>
-                    {triangle}
-                    <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,.3)', letterSpacing: '.08em', marginBottom: 8, textTransform: 'uppercase' }}>
-                      Explore Logary
-                    </div>
-                    {FEATURES.map(f => (
-                      <Link key={f.slug} href={`/features/${f.slug}`} onClick={() => setFeatOpen(false)} style={{
-                        display: 'flex', flexDirection: 'column', padding: '10px 14px',
-                        borderRadius: 10, transition: 'all .18s ease',
-                        textDecoration: 'none', borderLeft: '2px solid transparent',
-                      }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,.03)'; e.currentTarget.style.borderLeft = '2px solid #00D4FF' }}
-                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderLeft = '2px solid transparent' }}
-                      >
-                        <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 3 }}>{f.name}</div>
-                        <div style={{ fontSize: 12, color: 'var(--text3)', lineHeight: 1.4 }}>{f.tagline}</div>
-                      </Link>
-                    ))}
-                    <div style={{ borderTop: '1px solid rgba(255,255,255,.06)', marginTop: 10, paddingTop: 14, paddingBottom: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: 12, color: 'var(--text3)' }}>Everything you need, in one place.</span>
-                      <Link href="/#download" onClick={() => setFeatOpen(false)} style={{ fontSize: 12, fontWeight: 600, color: '#00D4FF', textDecoration: 'none' }}>
-                        Download the app
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              {[
+                { label: 'FEATURES', href: '/#features' },
+                { label: 'ECOSYSTEM', href: '/ecosystem' },
+                { label: 'ABOUT', href: '/about' }
+              ].map((item) => (
+                <Link key={item.label} href={item.href} style={{
+                  padding: '8px 14px', borderRadius: 100,
+                  color: 'rgba(255,255,255,0.5)', fontSize: 12, fontWeight: 700,
+                  letterSpacing: '0.05em', textDecoration: 'none', transition: 'all 0.2s ease'
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'transparent' }}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           )}
-
-          {/* RIGHT */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginLeft: isMobile ? 'auto' : 8 }}>
             {!isMobile && (
               <Link href="/#download" style={{
-                display: 'inline-flex', alignItems: 'center', gap: 7,
-                padding: '9px 20px', fontSize: 14, fontWeight: 700,
-                background: 'linear-gradient(135deg,#00D4FF,#A259FF)',
-                color: '#fff', borderRadius: 10, textDecoration: 'none',
-                boxShadow: '0 4px 16px rgba(0,212,255,.25)', transition: 'all .2s',
+                padding: '10px 20px', borderRadius: 100,
+                fontSize: 13, fontWeight: 700,
+                background: '#fff', color: '#000',
+                textDecoration: 'none',
+                transition: 'transform 0.2s ease',
               }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '.9'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
               >
-                Download Free
+                Get Started
               </Link>
             )}
 
             {isMobile && (
               <button onClick={() => setMenuOpen(o => !o)} style={{
-                width: 38, height: 38, borderRadius: 10,
-                background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.1)',
+                width: 36, height: 36, borderRadius: 100,
+                background: 'rgba(255,255,255,0.08)', border: 'none',
                 display: 'flex', flexDirection: 'column', alignItems: 'center',
-                justifyContent: 'center', gap: 5, cursor: 'pointer', transition: 'all .2s',
+                justifyContent: 'center', gap: 4, cursor: 'pointer',
               }}>
-                {menuOpen ? (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 2l12 12M14 2L2 14" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <>
-                    <div style={{ width: 16, height: 1.5, background: '#fff', borderRadius: 1 }} />
-                    <div style={{ width: 11, height: 1.5, background: 'rgba(255,255,255,.5)', borderRadius: 1 }} />
-                    <div style={{ width: 16, height: 1.5, background: '#fff', borderRadius: 1 }} />
-                  </>
-                )}
+                <div style={{ width: 14, height: 1.5, background: '#fff', borderRadius: 1 }} />
+                <div style={{ width: 14, height: 1.5, background: '#fff', borderRadius: 1 }} />
               </button>
             )}
           </div>
-        </div>
-      </nav>
-
-      {/* MOBILE MENU */}
+        </nav>
+      </div>
       {isMobile && menuOpen && (
         <div style={{
-          position: 'fixed', top: 68, left: 0, right: 0,
-          background: 'rgba(10,11,16,.97)', backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,.07)',
-          zIndex: 199, padding: '16px 20px 28px',
-          overflowY: 'auto', maxHeight: 'calc(100vh - 68px)',
+          position: 'fixed', inset: 0, zIndex: 190,
+          background: 'rgba(8, 8, 15, 0.98)', backdropFilter: 'blur(20px)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         }}>
-
-          {/* Links */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 14 }}>
-            <Link href="/about" onClick={() => setMenuOpen(false)} style={{
-              padding: '12px 14px', fontSize: 15, fontWeight: 600,
-              color: '#fff', textDecoration: 'none', borderRadius: 10, transition: 'background .15s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.05)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-            >
-              About
+          {['FEATURES', 'ECOSYSTEM', 'ABOUT'].map((item) => (
+            <Link key={item} href={`/${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} style={{ fontSize: 24, fontWeight: 800, color: '#fff', textDecoration: 'none', margin: '16px 0' }}>
+              {item}
             </Link>
-          </div>
-
-          {/* Features */}
-          <div style={{ borderTop: '1px solid rgba(255,255,255,.06)', paddingTop: 14, marginBottom: 20 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,.3)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 8, paddingLeft: 14 }}>
-              Features
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {FEATURES.map(f => (
-                <Link key={f.slug} href={`/features/${f.slug}`} onClick={() => setMenuOpen(false)} style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '11px 14px', borderRadius: 10, textDecoration: 'none', transition: 'background .15s',
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.05)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-                >
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 2 }}>{f.name}</div>
-                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,.4)' }}>{f.tagline}</div>
-                  </div>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, marginLeft: 8 }}>
-                    <path d="M3 7h8M7 3l4 4-4 4" stroke="rgba(255,255,255,.25)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Download CTA */}
-          <div style={{ borderTop: '1px solid rgba(255,255,255,.06)', paddingTop: 18 }}>
-            <Link href="/#download" onClick={() => setMenuOpen(false)} style={{
-              display: 'block', textAlign: 'center', padding: '15px', borderRadius: 14,
-              fontSize: 15, fontWeight: 800, background: 'linear-gradient(135deg,#00D4FF,#A259FF)',
-              color: '#fff', textDecoration: 'none', boxShadow: '0 6px 20px rgba(0,212,255,.2)',
-            }}>
-              Download Free
-            </Link>
-            <p style={{ textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,.25)', marginTop: 10 }}>
-              Free · iOS & Android
-            </p>
-          </div>
+          ))}
+          <Link href="/#download" onClick={() => setMenuOpen(false)} style={{ marginTop: 32, padding: '14px 32px', borderRadius: 100, fontSize: 16, fontWeight: 800, background: '#00D4FF', color: '#000', textDecoration: 'none' }}>
+            Get Started
+          </Link>
         </div>
       )}
     </>
