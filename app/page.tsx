@@ -86,7 +86,7 @@ export default function Home() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(162, 89, 255, 0.4)' }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(162, 89, 255, 0.25)' }}
           >
-            Get Started Free
+            Get Started
           </a>
           <a href="#features" style={{
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
