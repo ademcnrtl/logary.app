@@ -23,7 +23,7 @@ const LINK_COLUMNS = [
 ]
 
 const SOCIALS = [
-  { label: 'Discord', href: 'https://discord.gg/SJNqjdqMd3' },
+  { label: 'Discord', href: 'https://discord.gg/CDAgZYeZnP' },
   { label: 'X (Twitter)', href: '' },
   { label: 'Instagram', href: '' },
 ]
