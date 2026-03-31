@@ -80,7 +80,7 @@ export default function Ecosystem() {
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
                         <div style={{ width: 56, height: 56, overflow: 'hidden', flexShrink: 0, borderRadius: 12 }}>
-                            <img src="/logy.png" alt="Logy Bot" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src="/Logy.png" alt="Logy Bot" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                         <div>
                             <div style={{ fontSize: 12, fontWeight: 800, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 4 }}>DISCORD INTEGRATION</div>
